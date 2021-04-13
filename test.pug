@@ -1,0 +1,267 @@
+doctype html
+head
+  meta(charset='utf-8')
+  link(href='main.css' rel='stylesheet')
+#container
+  img#wall(src='./src/wall.png')
+  img#btn(src='./src/btn_aboutUs.png')
+  #book
+    img#last(src='./src/last.png')
+    img#list(src='./src/list.png')
+    img#first(src='./src/first.png')
+    #page
+    #footer
+      img#prev(src='./src/prev.png')
+      #pageNum 00
+      img#next(src='./src/next.png')
+  #page1
+script(type='text/javascript').
+  var btn = document.getElementById('btn');
+  var book = document.getElementById('book');
+  var home = document.getElementById('list');
+  var next = document.getElementById('next');
+  var prev = document.getElementById('prev');
+  var first = document.getElementById('first');
+  var last = document.getElementById('last');
+  var pageNum = document.getElementById('pageNum');
+  var page = document.getElementById('page');
+  var goal, why, how, intro1, intro2;
+  var page1 = document.getElementById('page1');
+  var page_cnt = 0;
+  // var objs = document.getElementsByTagName('img');
+  btn.addEventListener('click', function(){
+  btn.style.visibility = "hidden";
+  book.style.visibility = "visible";
+  home.style.visibility = "visible";
+  page_cnt = 0;
+  pageNum.innerText = "00";
+  last.style.visibility = "visible";
+  next.style.visibility = "visible";
+  jumpPage();
+  }, false);
+  home.addEventListener('click', function(){
+  btn.style.visibility = "visible";
+  book.style.visibility = "hidden";
+  home.style.visibility = "hidden";
+  last.style.visibility = "hidden";
+  first.style.visibility = "hidden";
+  next.style.visibility = "hidden";
+  prev.style.visibility = "hidden";
+  }, false);
+  next.addEventListener('click', function(){
+  if(page_cnt == 0){
+  first.style.visibility = "visible";
+  prev.style.visibility = "visible";
+  }
+  page_cnt++;
+  pageNum.innerText = "0" + page_cnt;
+  if(page_cnt == 7){
+  next.style.visibility = "hidden";
+  last.style.visibility = "hidden";
+  }
+  jumpPage();
+  }, false)
+  prev.addEventListener('click', function(){
+  if(page_cnt == 7){
+  last.style.visibility = "visible";
+  next.style.visibility = "visible";
+  }
+  page_cnt--;
+  pageNum.innerText = "0" + page_cnt;
+  if(page_cnt == 0){
+  prev.style.visibility = "hidden";
+  first.style.visibility = "hidden";
+  }
+  jumpPage();
+  }, false)
+  last.addEventListener('click', function(){
+  page_cnt = 7;
+  pageNum.innerText = "07";
+  last.style.visibility = "hidden";
+  next.style.visibility = "hidden";
+  prev.style.visibility = "visible";
+  first.style.visibility = "visible";
+  jumpPage();
+  })
+  first.addEventListener('click', function(){
+  page_cnt = 0;
+  pageNum.innerText = "00";
+  first.style.visibility = "hidden";
+  prev.style.visibility = "hidden";
+  next.style.visibility = "visible";
+  last.style.visibility = "visible";
+  jumpPage();
+  })
+  page1.addEventListener('click', function(){
+  page1.style.visibility = "hidden";
+  })
+  function jumpPage() {
+  switch(page_cnt){
+  case 0:
+  page.style.backgroundImage = "url(src/cover_text.png)";
+  page.innerHTML = "";
+  break;
+  case 1:
+  page.style.backgroundImage = "url(src/content.png)";
+  page.innerHTML =
+  "<h1>遊戲初衷</h1>\\
+  <img src='./src/goal.png' id='goal'>\\
+  <img src='./src/why.png' id='why'>\\
+  <img src='./src/how.png' id='how'>";
+  goal = document.getElementById('goal');
+  why = document.getElementById('why');
+  how = document.getElementById('how');
+  goal.addEventListener('click', function(){
+  page1.style.visibility = "visible";
+  page1.innerHTML =
+  "<img src='./src/goal.png' id='content_title'>\\
+  <img src='./src/goal_txt.png' id='content_bg'>\\
+  <div id='content'>讓銀髮族多出外走走，預防慢性疾病，擁有健康的身心靈。</div>";
+  });
+  why.addEventListener('click', function(){
+  page1.style.visibility = "visible";
+  page1.innerHTML =
+  "<img src='./src/why.png' id='content_title'>\\
+  <img src='./src/why_txt.png' id='content_bg'>\\
+  <div id='content'>我們想給銀髮族們最健康快樂的老年生活，越活越年輕！</div>";
+  });
+  how.addEventListener('click', function(){
+  page1.style.visibility = "visible";
+  page1.innerHTML =
+  "<img src='./src/how.png' id='content_title'>\\
+  <img src='./src/how_txt.png' id='content_bg'>\\
+  <div id='content'>以任務的方式，誘導銀髮族出外互動，任務達成後，給予獎勵。</div>";
+  });
+  break;
+  case 2:
+  page.style.backgroundImage = "url(src/content.png)";
+  page.innerHTML =
+  "<h1>成員介紹</h1>\\
+  <img src='./src/photo/fang.jpg' id='profile1'>\\
+  <div id='name1'>方藝璇</div>\\
+  <img src='./src/photo/wen.jpg' id='profile2'>\\
+  <div id='name2'>范瑀文</div>";
+  intro1 = document.getElementById('profile1');
+  intro2 = document.getElementById('profile2');
+  intro1.addEventListener('click', function(){
+  page1.style.visibility = "visible";
+  page1.innerHTML =
+  "<img src='./src/photo/fang.jpg' id='photo'>\\
+  <div id='name'>方藝璇</div>\\
+  <div id='intro'><p>興趣 | 登山 探險 攀岩 看書<br>\\
+  專長 | 插畫 平面設計<br>\\
+  主要負責部分 | 訪談 美術設計</p></div>";
+  });
+  intro2.addEventListener('click', function(){
+  page1.style.visibility = "visible";
+  page1.innerHTML =
+  "<img src='./src/photo/wen.jpg' id='photo'>\\
+  <div id='name'>范瑀文</div>\\
+  <div id='intro'><p>興趣 | 看電影 攝影<br>\\
+  專長 | 剪片 平面製作<br>\\
+  主要負責部份 | 介面美術設計</p></div>";
+  });
+  break;
+  case 3:
+  page.style.backgroundImage = "url(src/content.png)";
+  page.innerHTML =
+  "<h1>成員介紹</h1>\\
+  <img src='./src/photo/chang.jpeg' id='profile1'>\\
+  <div id='name1'>張禾姈</div>\\
+  <img src='./src/photo/huang.jpg' id='profile2'>\\
+  <div id='name2'>黃冠淳</div>";
+  intro1 = document.getElementById('profile1');
+  intro2 = document.getElementById('profile2');
+  intro1.addEventListener('click', function(){
+  page1.style.visibility = "visible";
+  page1.innerHTML =
+  "<img src='./src/photo/chang.jpeg' id='photo'>\\
+  <div id='name'>張禾姈</div>\\
+  <div id='intro'><p>興趣 | 密室逃脫.解謎遊戲<br>\\
+  專長 | 物件導向設計<br>\\
+  主要負責部份 | </p></div>";
+  });
+  intro2.addEventListener('click', function(){
+  page1.style.visibility = "visible";
+  page1.innerHTML =
+  "<img src='./src/photo/huang.jpg' id='photo'>\\
+  <div id='name'>黃冠淳</div>\\
+  <div id='intro'><p>興趣 | 籃球 popping<br>\\
+  專長 | 最佳化設計<br>\\
+  主要負責部份 | </p></div>";
+  });
+  break;
+  case 4:
+  page.style.backgroundImage = "url(src/content.png)";
+  page.innerHTML =
+  "<h1>成員介紹</h1>\\
+  <img src='./src/photo/kuo.jpg' id='profile1'>\\
+  <div id='name1'>郭庭嘉</div>\\
+  <img src='./src/photo/wang.jpg' id='profile2'>\\
+  <div id='name2'>王鴻縉</div>";
+  intro1 = document.getElementById('profile1');
+  intro2 = document.getElementById('profile2');
+  intro1.addEventListener('click', function(){
+  page1.style.visibility = "visible";
+  page1.innerHTML =
+  "<img src='./src/photo/kuo.jpg' id='photo'>\\
+  <div id='name'>郭庭嘉</div>\\
+  <div id='intro'><p>興趣 | 追劇 KPOP<br>\\
+  專長 | Deep Learning<br>\\
+  主要負責部份 | </p></div>";
+  });
+  intro2.addEventListener('click', function(){
+  page1.style.visibility = "visible";
+  page1.innerHTML =
+  "<img src='./src/photo/wang.jpg' id='photo'>\\
+  <div id='name'>王鴻縉</div>\\
+  <div id='intro'><p>興趣 | 游泳 排球<br>\\
+  專長 | android APP設計<br>\\
+  主要負責部份 | </p></div>";
+  });
+  break;
+  case 5:
+  page.style.backgroundImage = "url(src/content.png)";
+  page.innerHTML =
+  "<h1>成員介紹</h1>\\
+  <img src='./src/photo/chiu.jpg' id='profile1'>\\
+  <div id='name1'>邱明叡</div>\\
+  <img src='./src/photo/dying.jpg' id='profile2'>\\
+  <div id='name2'>水獺(?)</div>";
+  intro1 = document.getElementById('profile1');
+  intro2 = document.getElementById('profile2');
+  intro1.addEventListener('click', function(){
+  page1.style.visibility = "visible";
+  page1.innerHTML =
+  "<img src='./src/photo/chiu.jpg' id='photo'>\\
+  <div id='name'>邱明叡</div>\\
+  <div id='intro'><p>興趣 | 看電影 羽球 逛市集<br>\\
+  專長 | 爬蟲 深度模型<br>\\
+  主要負責部份 | </p></div>";
+  });
+  intro2.addEventListener('click', function(){
+  page1.style.visibility = "visible";
+  page1.innerHTML =
+  "<img src='./src/photo/dying.jpg' id='photo'>\\
+  <div id='name'>水獺(?)</div>\\
+  <div id='intro'><p>興趣 | 厭世 觀察人類<br>\\
+  專長 | 協助紓壓<br>\\
+  主要負責部份 | Debug(取代黃色小鴨)</p></div>";
+  });
+  break;
+  case 6:
+  page.style.backgroundImage = "url(src/content.png)";
+  page.innerHTML =
+  "<h1>最後...</h1>\\
+  <h2>感謝您下載本遊戲，<br>\\
+  ....................<br>\\
+  祝您有美好的遊戲體驗！</h2>\\
+  <img src='./src/photo/group.jpg' id='group'>";
+  break;
+  case 7:
+  page.style.backgroundImage = "url(src/backCover.png)";
+  page.innerHTML =
+  "<h3>介 紹 完 畢<br></h3><h4>The End</h4>";
+  break;
+  }
+  }
